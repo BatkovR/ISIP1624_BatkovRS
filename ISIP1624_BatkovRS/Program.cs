@@ -52,6 +52,95 @@ while (!exit)
             break;
     }
 }
+
+static void AddProduct()
+{
+    try
+    {
+        Console.Write("Введите название товара: ");
+        string name = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            Console.WriteLine("Вы ввели пустое поле!");
+            return;
+        }
+
+        Console.Write("Введите цену товара: ");
+        if (!decimal.TryParse(Console.ReadLine(), out decimal price) || price < 0)
+        {
+            Console.WriteLine("Некорректная цена!");
+            return;
+        }
+
+        Console.Write("Введите количество товара: ");
+        if (!int.TryParse(Console.ReadLine(), out int quantity) || quantity < 0)
+        {
+            Console.WriteLine("Некорректное количество!");
+            return;
+        }
+
+        Console.WriteLine("Выберите категорию:");
+        Console.WriteLine("1. Electronics");
+        Console.WriteLine("2. Clothing");
+        Console.WriteLine("3. Food");
+        Console.Write("Введите номер категории: ");
+        string catInput = Console.ReadLine();
+
+        Category category;
+        switch (catInput)
+        {
+            case "1":
+                category = Category.Electronic;
+                break;
+            case "2":
+                category = Category.Clothing;
+                break;
+            case "3":
+                category = Category.Food;
+                break;
+            default:
+                Console.WriteLine("Некорректная категория");
+                return;
+        }
+
+        Product newProduct = new Product(name, price, quantity, category);
+        products.Add(newProduct);
+        Console.WriteLine($"Товар добавлен: {newProduct.code} - {newProduct.name}");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Ошибка: {ex.Message}");
+    }
+}
+static void RemoveProduct()
+{
+    Console.Write("Введите код товара для удаления: ");
+    string code = Console.ReadLine();
+
+    Product productToRemove = products.Find(p => p.code == code);
+    if (productToRemove != null)
+    {
+        products.Remove(productToRemove);
+        Console.WriteLine($"Товар {code} успешно удален.");
+    }
+    else
+    {
+        Console.WriteLine("Товар с таким кодом не найден.");
+    }
+}
+
+static void OrderProduct();
+{
+    Console.WriteLine("Введите код для заказа товара");
+    string code = Console.ReadLine();
+
+    Product productToOrder = 
+}
+
+static void SellProduct();
+
+static void FindProduct();
+
 public enum Category
 {
     Electronic,
