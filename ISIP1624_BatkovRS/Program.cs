@@ -2,8 +2,6 @@
 using System.Diagnostics;
 using System.Xml.Linq;
 
-bool exit = false;
-
 List<Product> products = new List<Product>() {
 
     new Product("101", "телевизор", 30000, 10, Category.Electronic),
@@ -13,6 +11,44 @@ List<Product> products = new List<Product>() {
     new Product("105", "ноутбук", 55000, 5, Category.Electronic)
 
 };
+
+
+bool exit = false;
+
+while (!exit)
+{
+    Console.WriteLine("\nВыберите команду:");
+    Console.WriteLine("1. Добавить товар");
+    Console.WriteLine("2. Удалить товар");
+    Console.WriteLine("3. Заказать поставку товара");
+    Console.WriteLine("4. Продать товар");
+    Console.WriteLine("5. Поиск товара по коду, названию и категории");
+    Console.WriteLine("6. Выход");
+    Console.Write("Введите номер команды: ");
+    string choice = Console.ReadLine();
+
+    switch (choice)
+    {
+        case "1":
+            AddProduct();
+            break;
+        case "2":
+            RemoveProduct();
+            break;
+        case "3":
+            SellProduct();
+            break;
+        case "5":
+            FindProduct();
+            break;
+        case "6":
+            exit = true;
+            break;
+        default:
+            Console.WriteLine("Некорректный ввод. Введите снова.");
+            break;
+    }
+}
 public enum Category
 {
     Electronic,
