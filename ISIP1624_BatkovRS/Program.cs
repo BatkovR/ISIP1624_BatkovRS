@@ -36,6 +36,9 @@ while (!exit)
             RemoveProduct();
             break;
         case "3":
+            OrderProduct();
+            break;
+        case "4":
             SellProduct();
             break;
         case "5":
